@@ -33,9 +33,32 @@ export class UsersService {
       return user;
     }
 
-    public async create(createUserDto: CreateUserDto): Promise<IUsers> {
+    public async createUser(createUserDto: CreateUserDto): Promise<IUsers> {
       const createdUser = await this.userModel.create(createUserDto);
       return createdUser;
     }
 
+    public async update(cod: string, updateUserDto: UpdateUserDto): Promise<IUsers> {
+      const updatedUser = await this.userModel
+        .findOneAndUpdate({ cod },
+          updateUserDto,
+          { new: true }
+        );
+
+      if (!updatedUser) {
+        throw new NotFoundException(`User id: ${cod} not found`);
+      }
+      return updatedUser;
+
+    }
+
+    public async delete(cod: string): Promise<IUsers> {
+      const deletedUser = await this.userModel
+        .findOneAndRemove({ cod });
+
+      if (!deletedUser) {
+        throw new NotFoundException(`User id: ${cod} not found`);
+      }
+      return deletedUser;
+    }
 }
