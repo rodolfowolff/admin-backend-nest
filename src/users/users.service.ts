@@ -1,26 +1,41 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { IUsers } from './interfaces/users.interface';
+import { CreateUserDto, UpdateUserDto } from './dto';
+import { Users } from './schemas/users.schema';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
-  }
+  constructor(
+    @InjectModel(Users.name) private readonly userModel: Model<Users>,
+  ) {}
 
-  findAll() {
-    return `This action returns all users`;
-  }
+    public async findAll(paginationQuery: PaginationQueryDto): Promise<IUsers[]> {
+      const { limit, offset } = paginationQuery;
+      
+      return await this.userModel
+        .find()
+        .skip(offset)
+        .limit(limit)
+        .exec();
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
+    public async findOne(cod: string): Promise<IUsers> {
+      const user = await this.userModel
+        .findOne({ cod })
+        .exec();
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
+      if (!user) {
+        throw new NotFoundException(`User id: ${cod} not found`);
+      }
+      return user;
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
+    public async create(createUserDto: CreateUserDto): Promise<IUsers> {
+      const createdUser = await this.userModel.create(createUserDto);
+      return createdUser;
+    }
+
 }
