@@ -52,7 +52,7 @@ export class UsersService {
 
     }
 
-    public async delete(cod: string): Promise<IUsers> {
+    public async remove(cod: string): Promise<IUsers> {
       const deletedUser = await this.userModel
         .findOneAndRemove({ cod });
 
