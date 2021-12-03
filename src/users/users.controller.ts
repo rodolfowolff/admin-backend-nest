@@ -12,7 +12,7 @@ import {
   Delete } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto, UpdateUserDto } from './dto';
-import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @Controller('users')
 export class UsersController {
@@ -22,19 +22,17 @@ export class UsersController {
   public async getAllUsers(
     @Res() res,
     @Query() paginationQuery: PaginationQueryDto) {
-      const { limit, offset } = paginationQuery;
-      
-      try {
-        const users = await this.usersService.findAll(paginationQuery);
-        if (!users) {
-          throw new NotFoundException('Users does not exist!');
-        }
-        res.status(HttpStatus.OK).json(users);
+    try {
+      const users = await this.usersService.findAll(paginationQuery);
+      if (!users) {
+        throw new NotFoundException('Users does not exist!');
       }
-      catch (error) {
-        res.status(HttpStatus.BAD_REQUEST).json(error);
-      }
+      res.status(HttpStatus.OK).json(users);
     }
+    catch (error) {
+      res.status(HttpStatus.BAD_REQUEST).json(error);
+    }
+  }
   
   @Get(':cod')
   public async getUser(
@@ -98,7 +96,7 @@ export class UsersController {
     @Res() res,
     @Param('cod') cod: string) {
     try {
-      const deletedUser = await this.usersService.delete(cod);
+      const deletedUser = await this.usersService.remove(cod);
       if (!deletedUser) {
         throw new NotFoundException('User id does not exist!');
       }
