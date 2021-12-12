@@ -9,11 +9,11 @@ export class Users extends Document {
   @Prop()
   username: string;
 
-  @Prop()
-  password: string;
+  // @Prop()
+  // password: string;
 
-  @Prop({ unique: true })
-  email: string;
+  // @Prop()
+  // email: string;
   
   @Prop()
   dateofbirth: Date;

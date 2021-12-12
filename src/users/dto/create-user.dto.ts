@@ -31,18 +31,18 @@ export class CreateUserDto {
   })
   readonly username: string;
 
-  @IsNotEmpty()
-  @MinLength(4, {
-      message: 'Password is too short. Minimal length is $constraint1 characters, but actual is $value',
-  })
-  @MaxLength(20, {
-    message: 'Password is too long. Maximal length is $constraint1 characters, but actual is $value',
-  })
-  readonly password: string;
+  // @IsNotEmpty()
+  // @MinLength(4, {
+  //     message: 'Password is too short. Minimal length is $constraint1 characters, but actual is $value',
+  // })
+  // @MaxLength(20, {
+  //   message: 'Password is too long. Maximal length is $constraint1 characters, but actual is $value',
+  // })
+  // readonly password: string;
 
-  @IsEmail()
-  @IsNotEmpty()
-  readonly email: string;
+  // @IsEmail()
+  // @IsNotEmpty()
+  // readonly email: string;
 
   @IsDate()
   @IsNotEmpty()
