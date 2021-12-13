@@ -44,9 +44,9 @@ export class CreateUserDto {
   // @IsNotEmpty()
   // readonly email: string;
 
-  // @IsDate()
-  // @IsNotEmpty()
-  // readonly dateofbirth: Date;
+  @IsDate()
+  @IsNotEmpty()
+  readonly dateofbirth: Date;
 
   @IsArray()
   readonly address: Array<string>;

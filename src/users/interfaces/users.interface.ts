@@ -5,7 +5,7 @@ export interface IUsers extends Document {
   readonly username: string;
   // readonly password: string;
   // readonly email: string;
-  // readonly dateofbirth: Date;
+  readonly dateofbirth: Date;
   readonly address: Array<string>;
   readonly githubusername: string;
 }
