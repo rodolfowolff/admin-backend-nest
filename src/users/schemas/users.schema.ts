@@ -15,8 +15,8 @@ export class Users extends Document {
   // @Prop()
   // email: string;
   
-  @Prop()
-  dateofbirth: Date;
+  // @Prop()
+  // dateofbirth: Date;
 
   @Prop()
   githubusername: string;

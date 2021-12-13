@@ -28,7 +28,7 @@ export class UsersService {
         .exec();
 
       if (!user) {
-        throw new NotFoundException(`User id: ${cod} not found`);
+        throw new NotFoundException(`User cod: ${cod} not found`);
       }
       return user;
     }
@@ -46,7 +46,7 @@ export class UsersService {
         );
 
       if (!updatedUser) {
-        throw new NotFoundException(`User id: ${cod} not found`);
+        throw new NotFoundException(`User cod: ${cod} not found`);
       }
       return updatedUser;
 
@@ -57,7 +57,7 @@ export class UsersService {
         .findOneAndRemove({ cod });
 
       if (!deletedUser) {
-        throw new NotFoundException(`User id: ${cod} not found`);
+        throw new NotFoundException(`User cod: ${cod} not found`);
       }
       return deletedUser;
     }
