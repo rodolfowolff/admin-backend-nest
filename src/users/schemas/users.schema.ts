@@ -19,10 +19,29 @@ export class Users extends Document {
   dateofbirth: Date;
 
   @Prop()
-  githubusername: string;
+  cep: string;
 
   @Prop()
-  address: Array<string>;
+  uf: string;
+
+  @Prop()
+  localidade: string;
+
+  @Prop()
+  bairro: string;
+
+  @Prop()
+  logradouro: string;
+
+  @Prop()
+  numero: string;
+
+  @Prop()
+  complemento: string;
+
+  @Prop()
+  githubusername: string;
+
 }
 
 export const UsersSchema = SchemaFactory.createForClass(Users);

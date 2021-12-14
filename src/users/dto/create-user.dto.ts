@@ -2,6 +2,7 @@ import {
   IsString,
   IsEmail,
   IsNotEmpty,
+  IsOptional,
   MaxLength,
   MinLength,
   IsDate,
@@ -48,9 +49,35 @@ export class CreateUserDto {
   @IsNotEmpty()
   readonly dateofbirth: Date;
 
-  @IsArray()
-  readonly address: Array<string>;
+  @IsString()
+  @IsOptional()
+  readonly cep: string;
 
   @IsString()
+  @IsOptional()
+  readonly uf: string;
+
+  @IsString()
+  @IsOptional()
+  readonly localidade: string;
+
+  @IsString()
+  @IsOptional()
+  readonly bairro: string;
+
+  @IsString()
+  @IsOptional()
+  readonly logradouro: string;
+
+  @IsString()
+  @IsOptional()
+  readonly numero: string;
+
+  @IsString()
+  @IsOptional()
+  readonly complemento: string;
+
+  @IsString()
+  @IsOptional()
   readonly githubusername: string;
 }
